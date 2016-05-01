@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>统一异常处理demo</title>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="lib/bootstrap/normalize.css" />
+		<style>
+            .ftodo{text-decoration : line-through ; }
+            .todo-btn{margin-right: 15px;cursor: pointer;}
+            [ms-hd]{display: none;}
+		</style>
+	</head>
+	<body ms-controller="todo">
+		<div class="container">
+            <div class="row">
+                <div class="span8 offset2">
+                    <div id="todo" class="well">
+                    
+	                    <table class="table table-hover">
+	                        <thead>
+	                            <tr>
+	                                <td>
+	                                    <h3 class="text-success">待办事项</h3>
+	                                </td>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+                                <tr ms-hd ms-repeat="todolist" 
+	                        		ms-class-1="success:todolist[$index].finish"
+	                        		ms-class-2="error:!todolist[$index].finish && todolist[$index].priority == '1'"
+	                        		ms-class-3="warning:!todolist[$index].finish && todolist[$index].priority == '2'"
+	                        		ms-class-4="info:!todolist[$index].finish && todolist[$index].priority == '3'">
+	                                <td class="span10" ms-class="todolist[$index].finish ? 'ftodo muted' : 'todo'">{{ todolist[$index].todo }}</td>
+	                                <td class="te span2">
+	                                    <div>
+	                                        <a class="todo-btn" title="redo" ms-click="redoTodo(todolist[$index])" ms-if="todolist[$index].finish"><i class="icon-repeat"></i></a>
+	                                        <a class="todo-btn" title="finish" ms-click="finishTodo(todolist[$index])" ms-if="!todolist[$index].finish"><i class="icon-ok"></i></a>
+	                                        <a class="todo-btn" title="delete" ms-click="deleteTodo(todolist[$index])"><i class="icon-trash"></i></a>                          
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript" src="lib/require/require.min.js" ></script>
+		<script type="text/javascript" src="config.js" ></script>
+		<script type="text/javascript" src="js/controller/index.js" ></script>
+	</body>
+</html>
